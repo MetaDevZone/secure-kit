@@ -38,7 +38,7 @@ describe('AdvancedRateLimiter', () => {
       expect(result.retryAfter).toBeGreaterThan(0);
     });
 
-    it('should reset after window expires', (done) => {
+    it('should reset after window expires', done => {
       // Use up all requests
       for (let i = 0; i < 10; i++) {
         rateLimiter.isAllowed('user3');
