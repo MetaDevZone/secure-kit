@@ -1,5 +1,5 @@
 import express from 'express';
-import { ExpressAdapter } from 'secure-backend';
+import { ExpressAdapter } from 'secure-kit';
 import config from '../secure-backend.config';
 
 const app = express();

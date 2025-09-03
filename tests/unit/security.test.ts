@@ -39,7 +39,10 @@ describe('SecurityManager - Unit Tests', () => {
 
   describe('CORS Validation', () => {
     test('should allow valid origin', () => {
-      const isValid = securityManager.validateCORS('https://example.com', 'GET');
+      const isValid = securityManager.validateCORS(
+        'https://example.com',
+        'GET'
+      );
       expect(typeof isValid).toBe('boolean');
     });
 
@@ -55,8 +58,11 @@ describe('SecurityManager - Unit Tests', () => {
         },
       });
       const strictSecurityManager = new SecurityManager(strictConfig);
-      
-      const isValid = strictSecurityManager.validateCORS('https://evil.com', 'GET');
+
+      const isValid = strictSecurityManager.validateCORS(
+        'https://evil.com',
+        'GET'
+      );
       expect(isValid).toBe(false);
     });
 
@@ -72,8 +78,11 @@ describe('SecurityManager - Unit Tests', () => {
         },
       });
       const wildcardSecurityManager = new SecurityManager(wildcardConfig);
-      
-      const isValid = wildcardSecurityManager.validateCORS('https://any.com', 'GET');
+
+      const isValid = wildcardSecurityManager.validateCORS(
+        'https://any.com',
+        'GET'
+      );
       expect(isValid).toBe(true);
     });
   });
@@ -127,7 +136,8 @@ describe('SecurityManager - Unit Tests', () => {
 
   describe('JWT Validation', () => {
     test('should validate JWT structure', () => {
-      const mockJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
+      const mockJWT =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c';
       const result = securityManager.validateJWT(mockJWT);
       expect(result).toBeDefined();
       expect(typeof result).toBe('object');
@@ -171,14 +181,14 @@ describe('SecurityManager - Unit Tests', () => {
         },
       });
       const strictSecurityManager = new SecurityManager(strictConfig);
-      
+
       const ip = '192.168.1.2';
       const result1 = strictSecurityManager.checkRateLimit(ip);
       expect(result1).not.toBeNull();
       if (result1) {
         expect(result1.remaining).toBeGreaterThanOrEqual(0);
       }
-      
+
       const result2 = strictSecurityManager.checkRateLimit(ip);
       expect(result2).not.toBeNull();
       if (result2) {
@@ -207,7 +217,9 @@ describe('SecurityManager - Unit Tests', () => {
       };
       const result = securityManager.validateFileUpload(invalidFile);
       expect(result.isValid).toBe(false);
-      expect(result.errors.some(error => error.includes('File type'))).toBe(true);
+      expect(result.errors.some(error => error.includes('File type'))).toBe(
+        true
+      );
     });
 
     test('should reject oversized files', () => {

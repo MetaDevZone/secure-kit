@@ -1,4 +1,4 @@
-import { SecureBackendConfig } from 'secure-backend';
+import { SecureBackendConfig } from 'secure-kit';
 
 const config: SecureBackendConfig = {
   "security": {
